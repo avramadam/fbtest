@@ -17,6 +17,8 @@ var connection = mysql.createConnection({
   database : config.database
 });
 
+var PORT = process.env.PORT || 3000;
+
 //Connect to Database only if Config.js parameter is set.
 
 if(config.use_database==='true')
@@ -102,4 +104,7 @@ function ensureAuthenticated(req, res, next) {
   res.redirect('/login')
 }
 
-app.listen(3000);
+app.listen(PORT, function() {
+  console.log("App listening on PORT: " + PORT);
+});
+

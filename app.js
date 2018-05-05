@@ -52,7 +52,7 @@ passport.use(new FacebookStrategy({
         if(err) throw err;
         if(rows.length===0)
           {
-            console.log("There is no such user, adding now");
+            console.log("There is no such user, adding now "+profile.id);
             connection.query("INSERT into user_info(user_id,user_name) VALUES('"+profile.id+"','"+profile.username+"')");
           }
           else
@@ -71,7 +71,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(session({ secret: 'keyboard cat', key: 'sid'}));
+app.use(session({ secret: 'keyboard cat', key: 'sid', resave: true, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
@@ -107,4 +107,3 @@ function ensureAuthenticated(req, res, next) {
 app.listen(PORT, function() {
   console.log("App listening on PORT: " + PORT);
 });
-

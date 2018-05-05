@@ -17,7 +17,7 @@ var connection = mysql.createConnection({
   database : config.database
 });
 
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 443;
 
 //Connect to Database only if Config.js parameter is set.
 
